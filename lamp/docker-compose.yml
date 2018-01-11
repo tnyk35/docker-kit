@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "10080:80"
+    links:
+      - db
+    volumes:
+      - .:/code
+  db:
+    image: "mysql:latest"
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./mysql:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dev_app
